@@ -1,6 +1,3 @@
-
-/*created by prashant shukla */
-
 var paddle2 =10,paddle1=10;
 
 var paddle1X = 10,paddle1Height = 110;
@@ -33,33 +30,32 @@ game_status = "";
 }
 
 function setup(){
-  var canvas =  createCanvas(700,600);
-  canvas.parent('canvas');
-  
-  video = createCapture(VIDEO);
-  video.size(700, 600);
-  video.hide();
-  
-  poseNet = ml5.poseNet(video, modelLoaded);
-  poseNet.on('pose', gotPoses);
-  }
-  
-  function modelLoaded() {
-    console.log('PoseNet Is Initialized');
-  }
-  
-  function gotPoses(results)
+var canvas =  createCanvas(700,600);
+canvas.parent('canvas');
+
+video = createCapture(VIDEO);
+video.size(700, 600);
+video.hide();
+
+poseNet = ml5.poseNet(video, modelLoaded);
+poseNet.on('pose', gotPoses);
+}
+
+function modelLoaded() {
+  console.log('PoseNet Is Initialized');
+}
+
+function gotPoses(results)
+{
+  if(results.length > 0)
   {
-    if(results.length > 0)
-    {
-  
-      rightWristY = results[0].pose.rightWrist.y;
-      rightWristX = results[0].pose.rightWrist.x;
-      scoreRightWrist =  results[0].pose.keypoints[10].score;
-      console.log(scoreRightWrist);
-    }
+
+    rightWristY = results[0].pose.rightWrist.y;
+    rightWristX = results[0].pose.rightWrist.x;
+    scoreRightWrist =  results[0].pose.keypoints[10].score;
+    console.log(scoreRightWrist);
   }
-  
+}
 
 function startGame()
 {
